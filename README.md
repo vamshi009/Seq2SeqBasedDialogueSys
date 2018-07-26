@@ -5,4 +5,6 @@ The project uses the model demonstarted from pytorch examples https://pytorch.or
 
 The model is tuned to work for the dialogue conversations data from Cornell Movie Dialogue Corpus!
 
+It can be seen as a sample version of a End-to-End Dialogue System!! 
+
 Happy Coding :D

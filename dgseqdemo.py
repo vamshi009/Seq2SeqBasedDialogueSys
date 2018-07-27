@@ -235,7 +235,7 @@ def readLangs(lang1, lang2, reverse=False):
 # earlier).
 #
 
-MAX_LENGTH = 10
+MAX_LENGTH = 11
 
 eng_prefixes = (
     "i am ", "i m ",
@@ -249,8 +249,11 @@ eng_prefixes = (
 
 def filterPair(p):
     return len(p[0].split(' ')) < MAX_LENGTH and \
-        len(p[1].split(' ')) < MAX_LENGTH and \
-        p[1].startswith(eng_prefixes)
+        len(p[1].split(' ')) < MAX_LENGTH
+
+
+'''and \
+p[1].startswith(eng_prefixes)'''
 
 
 def filterPairs(pairs):
@@ -670,6 +673,9 @@ def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, lear
 
     encoder_optimizer = optim.SGD(encoder.parameters(), lr=learning_rate)
     decoder_optimizer = optim.SGD(decoder.parameters(), lr=learning_rate)
+    '''s = random.choice(pairs)
+    print("printing te random pair\n")
+    print(s)'''
     training_pairs = [tensorsFromPair(random.choice(pairs))
                       for i in range(n_iters)]
     '''print("priniting the tarining pairs\n")
@@ -826,7 +832,7 @@ hidden_size = 256
 encoder1 = EncoderRNN(input_lang.n_words, hidden_size).to(device)
 attn_decoder1 = AttnDecoderRNN(hidden_size, output_lang.n_words, dropout_p=0.1).to(device)
 
-trainIters(encoder1, attn_decoder1, 1, print_every=300)
+trainIters(encoder1, attn_decoder1, 38000, print_every=1000)
 
 ######################################################################
 #
@@ -890,16 +896,16 @@ def evaluateAndShowAttention(input_sentence):
 ''' showAttention(input_sentence, output_words, attentions)'''
 
 
-evaluateAndShowAttention("do you see what you did")
+evaluateAndShowAttention("do you see what you did here")
 
-evaluateAndShowAttention("oh my god fuck you")
+evaluateAndShowAttention("oh my god fuck you cannot do that")
 
 
-evaluateAndShowAttention("can you please help me")
+evaluateAndShowAttention("can you please help me really need your help")
 
-evaluateAndShowAttention("fuck you bitch yeah fuck go sooner")
+evaluateAndShowAttention("fuck you bitch yeah why you behave like that")
 
-evaluateAndShowAttention(" love you")
+evaluateAndShowAttention(" love you lots of love love")
 
 ######################################################################
 # Exercises
